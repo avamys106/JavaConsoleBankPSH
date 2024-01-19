@@ -1,8 +1,15 @@
-package banking1;
-
-import java.util.Scanner;
-
-//public class AccountManager extends Account{
+//package banking1;
+//
+//import java.util.Scanner;
+//
+//class NormalAccount extends Account {
+//	
+//	public NormalAccount() {
+//		
+//	}
+//}
+//
+//public class AccountManager {
 //	
 //	public AccountManager(String acnumber, String name, int money) {
 //		super(acnumber, name, money);

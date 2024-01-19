@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class JavaConsoleBankPSH {
 
-	
 	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
@@ -21,9 +20,9 @@ public class JavaConsoleBankPSH {
 			case BankMenu.DEPOSIT:
 				account.depositMoney();
 				break;
-			case BankMenu.WITHDRAW:
-				account.withdrawMoney();
-				break;
+//			case BankMenu.WITHDRAW:
+//				account.withdrawMoney();
+//				break;
 			case BankMenu.INQUIRE:
 				account.showAccInfo();
 				break;
