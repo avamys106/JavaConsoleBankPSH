@@ -90,7 +90,6 @@ class Account {
 //			System.out.println(name);
 //			System.out.println(mymoney);
 //		}
-		
 	}
 //	public void withdrawMoney() {
 //		Scanner scanner = new Scanner(System.in);
