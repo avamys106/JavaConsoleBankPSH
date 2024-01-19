@@ -64,6 +64,7 @@ class Account {
 		System.out.println(name);
 		System.out.println(mymoney);
 //		myAccounts[numOfAccounts++];
+//		asd
 		
 		
 	}
