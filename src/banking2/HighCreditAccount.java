@@ -1,9 +1,11 @@
 package banking2;
 
+import java.util.Scanner;
+
 class HighCreditAccount extends Account {
 
-	public static int interest;
-	public static String creditRating;
+	public int interest;
+	public String creditRating;
 	public HighCreditAccount(String acnumber, String name, 
 			int mymoney, int interest, String creditRating) {
 		super(acnumber, name, mymoney);
@@ -17,9 +19,25 @@ class HighCreditAccount extends Account {
 	@Override
 	public void showAccountInfo() {
 		super.showAccountInfo();
-		System.out.println("기본이자> " + interest);
-		System.out.println("신용등급> " + creditRating);
+		System.out.println("기본이자>" + interest +"%");
+		System.out.println("신용등급>" + creditRating);
 	}
+	
+	@Override
+	public void interestCalculation() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("입금액:");
+		int money;
+		money = scanner.nextInt();
+		if(creditRating.equals("A") || creditRating.equals("a")) {
+			mymoney += (mymoney * interest / 100) + (mymoney * 0.07) + money;
+		} else if (creditRating.equals("B") || creditRating.equals("b")) {
+			mymoney += (mymoney * interest / 100) + (mymoney * 0.04) + money;
+		} else if (creditRating.equals("C") || creditRating.equals("c")) {
+			mymoney += (mymoney * interest / 100) + (mymoney * 0.02) + money;
+		} 
+	}
+	
 }
 
 //void showAccInfo() {

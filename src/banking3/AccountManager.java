@@ -1,4 +1,4 @@
-package banking2;
+package banking3;
 
 import java.util.Scanner;
 
@@ -101,7 +101,8 @@ class AccountManager {
 		System.out.print("출금액:");
 		money = scanner.nextInt();
 		for (int i = 0; i < numOfAccounts; i++) {
-			if (iAcnumber.compareTo(myAccounts[i].acnumber) == 0) {
+			if (iAcnumber.compareTo(myAccounts[i].acnumber) == 0
+					&& myAccounts[i] instanceof NormalAccount) {
 				if (myAccounts[i].mymoney >= money) {
 					myAccounts[i].mymoney -= money;
 					System.out.println("출금이 완료되었습니다.");

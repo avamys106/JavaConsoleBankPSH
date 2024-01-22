@@ -1,8 +1,6 @@
-package banking2;
+package banking3;
 
-import java.util.Scanner;
-
-public class Account {
+abstract class Account {
 	String acnumber;
 	String name;
 	int mymoney;
@@ -22,8 +20,12 @@ public class Account {
 		System.out.println("잔고> " + mymoney);
 	}
 	
-	public void interestCalculation( ) {
+	public void interestCalculation() {
 
+	}
+	
+	public void withdrawCalculation() {
+		
 	}
 	
 
