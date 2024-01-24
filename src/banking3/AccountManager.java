@@ -98,20 +98,14 @@ class AccountManager {
 		System.out.println("계좌번호와 출금할 금액을 입력하세요");
 		System.out.print("계좌번호:");
 		iAcnumber = scanner.nextLine();
-		System.out.print("출금액:");
-		money = scanner.nextInt();
 		for (int i = 0; i < numOfAccounts; i++) {
 			if (iAcnumber.compareTo(myAccounts[i].acnumber) == 0
 					&& myAccounts[i] instanceof NormalAccount) {
-				if (myAccounts[i].mymoney >= money) {
-					myAccounts[i].mymoney -= money;
-					System.out.println("출금이 완료되었습니다.");
-				} else {
-					System.out.println("잔액이 부족 합니다.");
-				}
-			} else {
-				System.out.println("계좌번호를 확인해주세요.");
-			}
+				((NormalAccount)myAccounts[i]).withdrawCalculation();
+			} else if (iAcnumber.compareTo(myAccounts[i].acnumber) == 0
+					&& myAccounts[i] instanceof HighCreditAccount) {
+				((HighCreditAccount)myAccounts[i]).withdrawCalculation();
+			} 
 		}
 	}
 

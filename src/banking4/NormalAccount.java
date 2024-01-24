@@ -1,4 +1,4 @@
-package banking3;
+package banking4;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -6,19 +6,52 @@ import java.util.Scanner;
 class NormalAccount extends Account {
 
 	public int interest;
-
+	
+	public NormalAccount() {
+	}
+	
 	public NormalAccount(String acnumber, String name, 
 			int mymoney, int interest) {
 		super(acnumber, name, mymoney);
 		this.interest = interest;
 	}
-	public NormalAccount() {
-	}
+
 
 	@Override
 	public void showAccountInfo() {
 		super.showAccountInfo();
 		System.out.println("기본이자>" + interest +"%");
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.acnumber.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		NormalAccount nObj = (NormalAccount) obj;
+		if(nObj.acnumber.equals(super.acnumber)) {
+			System.out.println("일치함");
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public void accountCreate() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("보통계좌선택.");
+		System.out.print("계좌번호: ");
+		acnumber = scanner.nextLine();
+		System.out.print("고객이름: ");
+		name = scanner.nextLine();
+		System.out.print("잔고: ");
+		mymoney = scanner.nextInt();
+		System.out.print("기본이자%(정수형태로입력): ");
+		interest = scanner.nextInt();
+
 	}
 	
 	@Override
