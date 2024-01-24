@@ -32,7 +32,6 @@ class NormalAccount extends Account {
 	public boolean equals(Object obj) {
 		NormalAccount nObj = (NormalAccount) obj;
 		if(nObj.acnumber.equals(super.acnumber)) {
-			System.out.println("중복데이터 있음");
 			return true;
 		} else {
 			return false;
@@ -91,8 +90,21 @@ class NormalAccount extends Account {
 					} else {
 						System.out.println("1,000원 단위로 출금하실수 있습니다.");
 					}
-				} else {
-					System.out.println("잔액이 부족 합니다.");
+				} else if (mymoney < money) {
+					String choiceTxt;
+					System.out.println("■ 잔고가 부족합니다. 금액전체를 출금할까요?(Y/N)");
+					System.out.println("- YES(Y): 금액전체 출금처리");
+					System.out.println("- NO(N): 출금요청취소");
+					choiceTxt = scanner.next();
+					if (choiceTxt.equals("Y") || choiceTxt.equals("y")) {
+						mymoney = 0;
+						System.out.println("금액전체를 출금했습니다.");
+						System.out.println("잔고: " + mymoney);
+					} else if (choiceTxt.equals("N") || choiceTxt.equals("n")) {
+						System.out.println("출금요청을 취소하셨습니다.");
+					} else {
+						System.out.println("Y 또는 N키를 눌러 진행하십시오");
+					}
 				}
 			} else {
 				System.out.println("음수를 출금할 수 없습니다.");

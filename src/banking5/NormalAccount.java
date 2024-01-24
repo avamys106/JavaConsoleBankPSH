@@ -1,24 +1,28 @@
-package banking4;
+package banking5;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-class HighCreditAccount extends Account {
+class NormalAccount extends Account {
 
 	public int interest;
-	public String creditRating;
-
-	public HighCreditAccount(String acnumber, String name, int mymoney, int interest, String creditRating) {
+	
+	public NormalAccount() {
+	}
+	
+	public NormalAccount(String acnumber, String name, 
+			int mymoney, int interest) {
 		super(acnumber, name, mymoney);
 		this.interest = interest;
-		this.creditRating = creditRating;
-
 	}
 
-	public HighCreditAccount() {
-	}
 
+	@Override
+	public void showAccountInfo() {
+		super.showAccountInfo();
+		System.out.println("기본이자>" + interest +"%");
+	}
+	
 	@Override
 	public int hashCode() {
 		return super.acnumber.hashCode();
@@ -26,8 +30,8 @@ class HighCreditAccount extends Account {
 	
 	@Override
 	public boolean equals(Object obj) {
-		HighCreditAccount hObj = (HighCreditAccount) obj;
-		if(hObj.acnumber.equals(super.acnumber)) {
+		NormalAccount nObj = (NormalAccount) obj;
+		if(nObj.acnumber.equals(super.acnumber)) {
 			return true;
 		} else {
 			return false;
@@ -37,7 +41,7 @@ class HighCreditAccount extends Account {
 	@Override
 	public void accountCreate() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("신용신뢰계좌선택.");
+		System.out.println("보통계좌선택.");
 		System.out.print("계좌번호: ");
 		acnumber = scanner.nextLine();
 		System.out.print("고객이름: ");
@@ -46,20 +50,9 @@ class HighCreditAccount extends Account {
 		mymoney = scanner.nextInt();
 		System.out.print("기본이자%(정수형태로입력): ");
 		interest = scanner.nextInt();
-		scanner.nextLine();
-		System.out.print("신용등급(A,B,C등급): ");
-		creditRating = scanner.nextLine();
-		System.out.println("계좌개설이 완료되었습니다.");
-		System.out.println();
+
 	}
 	
-	@Override
-	public void showAccountInfo() {
-		super.showAccountInfo();
-		System.out.println("기본이자>" + interest + "%");
-		System.out.println("신용등급>" + creditRating);
-	}
-
 	@Override
 	public void interestCalculation() {
 		Scanner scanner = new Scanner(System.in);
@@ -67,19 +60,11 @@ class HighCreditAccount extends Account {
 		System.out.print("입금액:");
 		try {
 			money = scanner.nextInt();
-			if (money > 0) {
-				if (money % 500 == 0) {
-					if (creditRating.equals("A") || creditRating.equals("a")) {
-						mymoney += (mymoney * interest / 100) + (mymoney * 0.07) + money;
-						System.out.println("입금이 완료되었습니다.");
-					} else if (creditRating.equals("B") || creditRating.equals("b")) {
-						mymoney += (mymoney * interest / 100) + (mymoney * 0.04) + money;
-						System.out.println("입금이 완료되었습니다.");
-					} else if (creditRating.equals("C") || creditRating.equals("c")) {
-						mymoney += (mymoney * interest / 100) + (mymoney * 0.02) + money;
-						System.out.println("입금이 완료되었습니다.");
-					}
-				} else {
+			if(money > 0) {
+				if(money % 500 == 0) {
+					mymoney += (mymoney * interest / 100) + money;
+					System.out.println("입금이 완료되었습니다.");
+				} else {  
 					System.out.println("500원 단위로 입금하실수 있습니다.");
 				}
 			} else {
@@ -89,7 +74,7 @@ class HighCreditAccount extends Account {
 			System.out.println("문자를 입력할 수 없습니다.");
 		}
 	}
-
+	
 	@Override
 	public void withdrawCalculation() {
 		Scanner scanner = new Scanner(System.in);
@@ -97,9 +82,9 @@ class HighCreditAccount extends Account {
 		System.out.print("출금액:");
 		try {
 			money = scanner.nextInt();
-			if (money > 0) {
-				if (mymoney >= money) {
-					if (money % 1000 == 0) {
+			if(money > 0) {
+				if(mymoney >= money) {
+					if(money % 1000 == 0) {
 						mymoney -= money;
 						System.out.println("출금이 완료되었습니다.");
 					} else {
@@ -129,3 +114,5 @@ class HighCreditAccount extends Account {
 		}
 	}
 }
+
+

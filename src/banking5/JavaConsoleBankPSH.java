@@ -1,4 +1,4 @@
-package banking4;
+package banking5;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -16,9 +16,16 @@ public class JavaConsoleBankPSH {
 		Scanner scanner = new Scanner(System.in);
 		AccountManager handler = new AccountManager();
 
+		try {
+			handler.readFriendInfo();
+		} catch (NullPointerException e) {
+		}
+
+		
 		while (true) {
-			handler.menuShow();
 			try {
+
+				handler.menuShow();
 				int choice = menuChoice();
 				switch (choice) {
 				case BankMenu.MAKE:
@@ -39,13 +46,13 @@ public class JavaConsoleBankPSH {
 					handler.deleteAccount();
 					break;
 				case BankMenu.EXIT:
+					handler.saveAccountInfo();
 					System.out.println("이용해 주셔서 감사합니다.");
 					return;
 				}
 			} catch (choiceErrorException e) {
-				System.out.println("1~5사이의 숫자를 입력해주세요.");
-			}
-
+				System.out.println("1~6사이의 숫자를 입력해주세요.");
+			} 
 		}
 	}
 
@@ -58,7 +65,7 @@ public class JavaConsoleBankPSH {
 			System.out.println("문자를 입력할 수 없습니다.");
 			return inputChoice;
 		}
-		if (!(inputChoice >= 1 && inputChoice <= 5)) {
+		if (!(inputChoice >= 1 && inputChoice <= 6)) {
 			choiceErrorException ex = new choiceErrorException();
 			throw ex;
 		}

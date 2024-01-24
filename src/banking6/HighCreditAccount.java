@@ -1,4 +1,4 @@
-package banking4;
+package banking6;
 
 import java.io.IOException;
 import java.util.InputMismatchException;

@@ -1,5 +1,12 @@
-package banking4;
+package banking5;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -172,7 +179,7 @@ class AccountManager {
 			Account item = it.next();
 			if (iAcnumber.equals(item.acnumber)) {
 				item.withdrawCalculation();
-			} 
+			}
 		}
 	}
 
@@ -202,8 +209,49 @@ class AccountManager {
 			if (deleteNum.equals(item.acnumber)) {
 				AccountSet.remove(item);
 				System.out.println("계좌번호가 삭제되었습니다.");
-			} 
+			}
 		}
 	}
-	
+
+	public void saveAccountInfo() {
+		try {
+			ObjectOutputStream out = new ObjectOutputStream
+					(new FileOutputStream("src/banking5/AccountInfo.obj"));
+			for (Account ar : AccountSet) {
+				out.writeObject(ar);
+			}
+			out.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void readFriendInfo() {
+		ObjectInputStream in = null;
+		try {
+			in = new ObjectInputStream (
+					new FileInputStream("src/banking5/AccountInfo.obj"));
+			while(true) {
+				Account ar = (Account)in.readObject();
+				AccountSet.add(ar);
+			}
+		}catch (FileNotFoundException e) {
+			System.out.println("AccountInfo.Obj 파일없음");
+		}
+		catch (EOFException e) {
+			System.out.println("AccountInfo.Obj 복원완료.");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("복원 중 알 수 없는 예외발생");
+		}
+		finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
