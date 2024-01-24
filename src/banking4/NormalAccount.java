@@ -32,7 +32,7 @@ class NormalAccount extends Account {
 	public boolean equals(Object obj) {
 		NormalAccount nObj = (NormalAccount) obj;
 		if(nObj.acnumber.equals(super.acnumber)) {
-			System.out.println("일치함");
+			System.out.println("중복데이터 있음");
 			return true;
 		} else {
 			return false;

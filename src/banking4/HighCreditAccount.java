@@ -20,6 +20,21 @@ class HighCreditAccount extends Account {
 	}
 
 	@Override
+	public int hashCode() {
+		return super.acnumber.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		HighCreditAccount hObj = (HighCreditAccount) obj;
+		if(hObj.acnumber.equals(super.acnumber)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
 	public void accountCreate() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("신용신뢰계좌선택.");

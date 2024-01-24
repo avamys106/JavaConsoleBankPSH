@@ -7,8 +7,8 @@ import java.util.Scanner;
 class AccountManager {
 
 	HashSet<Account> AccountSet;
-	NormalAccount nAccount = new NormalAccount();
-	HighCreditAccount hcAccount = new HighCreditAccount();
+//	NormalAccount nAccount = new NormalAccount();
+//	HighCreditAccount hcAccount = new HighCreditAccount();
 
 	void menuShow() {
 		System.out.println("----------Menu---------");
@@ -76,9 +76,75 @@ class AccountManager {
 		Scanner scanner = new Scanner(System.in);
 		String iAcnumber, iName, cRating, choiceTxt;
 		int iMoney, mInterest;
-		
+
 		if (choice == 1) {
-			nAccount.accountCreate();
+			System.out.println("보통계좌선택.");
+			System.out.print("계좌번호: ");
+			iAcnumber = scanner.nextLine();
+			System.out.print("고객이름: ");
+			iName = scanner.nextLine();
+			System.out.print("잔고: ");
+			iMoney = scanner.nextInt();
+			System.out.print("기본이자%(정수형태로입력): ");
+			mInterest = scanner.nextInt();
+			NormalAccount normal = new NormalAccount(iAcnumber, iName, iMoney, mInterest);
+			AccountSet.add(normal);
+			if (AccountSet.add(normal) == true) {
+				System.out.println("중복계좌발견됨.");
+				System.out.println("덮어쓸까요?(Y/N)");
+				scanner.nextLine();
+				choiceTxt = scanner.nextLine();
+				if (choiceTxt.equals("Y") || choiceTxt.equals("y")) {
+					System.out.println("계좌를 덮어쓰기하였습니다.");
+				} else if (choiceTxt.equals("N") || choiceTxt.equals("n")) {
+					System.out.println("취소합니다.");
+				} else {
+					System.out.println("Y또는 N키를 눌러 진행하십시오.");
+				}
+			} else if (AccountSet.add(normal) == false) {
+				AccountSet.add(normal);
+				System.out.println("계좌생성이 완료되었습니다.");
+			} else {
+//				System.out.println("계좌생성이 완료되었습니다.");
+			}
+		} else if (choice == 2) {
+			System.out.println("보통계좌선택.");
+			System.out.print("계좌번호: ");
+			iAcnumber = scanner.nextLine();
+			System.out.print("고객이름: ");
+			iName = scanner.nextLine();
+			System.out.print("잔고: ");
+			iMoney = scanner.nextInt();
+			System.out.print("기본이자%(정수형태로입력): ");
+			mInterest = scanner.nextInt();
+			System.out.print("신용등급(A,B,C등급): ");
+			cRating = scanner.nextLine();
+			HighCreditAccount high = new HighCreditAccount(iAcnumber, iName, iMoney, mInterest, cRating);
+			AccountSet.add(high);
+			if (AccountSet.add(high) == true) {
+				System.out.println("중복계좌발견됨.");
+				System.out.println("덮어쓸까요?(Y/N)");
+				choiceTxt = scanner.nextLine();
+				if (choiceTxt.equals("Y") || choiceTxt.equals("y")) {
+					System.out.println("계좌를 덮어쓰기하였습니다.");
+				} else if (choiceTxt.equals("N") || choiceTxt.equals("n")) {
+					System.out.println("취소합니다.");
+				} else {
+					System.out.println("Y또는 N키를 눌러 진행하십시오.");
+				}
+			} else if (AccountSet.add(high) == false) {
+				System.out.println("계좌생성이 완료되었습니다.");
+			} else {
+//				System.out.println("계좌생성이 완료되었습니다.");
+			}
+		}
+	}
+//	void makeAccount(int choice) {
+//		Scanner scanner = new Scanner(System.in);
+//		String iAcnumber, iName, cRating, choiceTxt;
+//		int iMoney, mInterest;
+//		
+//		if (choice == 1) {
 //			System.out.println("보통계좌선택.");
 //			System.out.print("계좌번호: ");
 //			iAcnumber = scanner.nextLine();
@@ -89,29 +155,56 @@ class AccountManager {
 //			System.out.print("기본이자%(정수형태로입력): ");
 //			mInterest = scanner.nextInt();
 //			NormalAccount normal = new NormalAccount(iAcnumber, iName, iMoney, mInterest);
+//			System.out.println(normal);
 //			AccountSet.add(normal);
-			if(AccountSet.contains(nAccount)) {
-				System.out.println("중복계좌발견됨.");
-				System.out.println("덮어쓸까요?(Y/N)");
-				choiceTxt = scanner.nextLine();
-				if(choiceTxt.equals("Y") || choiceTxt.equals("y")) {
-					System.out.println("계좌를 덮어쓰기하였습니다.");
-					AccountSet.add(nAccount);
-//					AccountSet.add(normal);
-				} else if( choiceTxt.equals("N") || choiceTxt.equals("n")) {
-					System.out.println("취소합니다.");
-				}
-			} else {
-				AccountSet.add(nAccount);
+//			if (AccountSet.add(normal) == false) {
 //				AccountSet.add(normal);
-				System.out.println("계좌개설이 완료되었습니다.");
-				System.out.println();
-			}
-		} else if (choice == 2) {
-			hcAccount.accountCreate();
-			AccountSet.add(hcAccount);
-		}
-	}
+//				System.out.println("계좌생성이 완료되었습니다.");
+//			} else {
+//				System.out.println("중복계좌발견됨.");
+//				System.out.println("덮어쓸까요?(Y/N)");
+//				scanner.nextLine();
+//				choiceTxt = scanner.nextLine();
+//				if (choiceTxt.equals("Y") || choiceTxt.equals("y")) {
+//					System.out.println("계좌를 덮어쓰기하였습니다.");
+//				} else if (choiceTxt.equals("N") || choiceTxt.equals("n")) {
+//					System.out.println("취소합니다.");
+//				} else {
+//					System.out.println("Y또는 N키를 눌러 진행하십시오.");
+//				}
+//			} 
+//		} else if (choice == 2) {
+//			System.out.println("보통계좌선택.");
+//			System.out.print("계좌번호: ");
+//			iAcnumber = scanner.nextLine();
+//			System.out.print("고객이름: ");
+//			iName = scanner.nextLine();
+//			System.out.print("잔고: ");
+//			iMoney = scanner.nextInt();
+//			System.out.print("기본이자%(정수형태로입력): ");
+//			mInterest = scanner.nextInt();
+//			System.out.print("신용등급(A,B,C등급): ");
+//			cRating = scanner.nextLine();
+//			HighCreditAccount high = new HighCreditAccount(iAcnumber, iName, iMoney, mInterest, cRating);
+//			AccountSet.add(high);
+//			if (AccountSet.add(high) == true) {
+//				System.out.println("중복계좌발견됨.");
+//				System.out.println("덮어쓸까요?(Y/N)");
+//				choiceTxt = scanner.nextLine();
+//				if (choiceTxt.equals("Y") || choiceTxt.equals("y")) {
+//					System.out.println("계좌를 덮어쓰기하였습니다.");
+//				} else if (choiceTxt.equals("N") || choiceTxt.equals("n")) {
+//					System.out.println("취소합니다.");
+//				} else {
+//					System.out.println("Y또는 N키를 눌러 진행하십시오.");
+//				}
+//			} else if (AccountSet.add(high) == false) {
+//				System.out.println("계좌생성이 완료되었습니다.");
+//			} else {
+////				System.out.println("계좌생성이 완료되었습니다.");
+//			}
+//		}
+//	}
 //	void makeAccount(int choice) {
 //		Scanner scanner = new Scanner(System.in);
 //		String iAcnumber, choiceTxt;
@@ -270,21 +363,11 @@ class AccountManager {
 		for (Account ar : AccountSet) {
 			System.out.println("주소값" + ar);
 			System.out.println("해시코드" + ar.hashCode());
-			nAccount.showAccountInfo();
-//			hcAccount.showAccountInfo();
+			ar.showAccountInfo();
 			System.out.println("전체 계좌 개수" + AccountSet.size());
 			System.out.println("--------------");
 		}
 		System.out.println("전체계좌정보 출력이 완료되었습니다.");
-		Iterator<Account> it = AccountSet.iterator();
-		while (it.hasNext()) {
-			Account item = it.next();
-			System.out.println(item);
-//			System.out.println(nAccount);
-//			System.out.println("메인해쉬코드" + item.hashCode());
-//			System.out.println("노말해쉬코드" + nAccount.hashCode());
-		}
-
 	}
 
 }
