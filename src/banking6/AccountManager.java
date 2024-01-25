@@ -14,23 +14,18 @@ import java.util.Scanner;
 class AccountManager {
 
 	HashSet<Account> AccountSet;
-//	NormalAccount nAccount = new NormalAccount();
-//	HighCreditAccount hcAccount = new HighCreditAccount();
 
 	void menuShow() {
 		System.out.println("----------Menu---------");
-		System.out.print("1.계좌 개설 ");
+		System.out.print("1.계좌개설 ");
 		System.out.print("2.입 금 ");
 		System.out.println("3.출 금 ");
 		System.out.print("4.계좌정보출력 ");
-		System.out.print("5.계좌정보삭제 ");
-		System.out.println("6.저장옵션 ");
+		System.out.println("5.계좌정보삭제 ");
+		System.out.print("6.저장옵션(미구현) ");
 		System.out.println("7.프로그램종료 ");
 		System.out.print("선택: ");
 		System.out.println();
-//		System.out.println(nAccount);
-//		System.out.println(AccountSet);
-
 	}
 
 	public AccountManager() {
@@ -44,43 +39,6 @@ class AccountManager {
 		System.out.println("2.신용신뢰계좌");
 	}
 
-//	void makeAccount(int choice) {
-//		Scanner scanner = new Scanner(System.in);
-//		String iAcnumber, choiceTxt;
-//		if (choice == 1) {
-//			System.out.println("보통계좌선택.");
-//			System.out.print("계좌번호: ");
-//			iAcnumber = scanner.nextLine();
-//			Iterator<Account> it = AccountSet.iterator();
-//			while (it.hasNext()) {
-//				Account item = it.next();
-//				if (iAcnumber.equals(item.acnumber)) {
-//					System.out.println("중복계좌발견됨.");
-//					System.out.println("덮어쓸까요?(Y/N)");
-//					choiceTxt = scanner.nextLine();
-//					if (choiceTxt.equals("Y") || choiceTxt.equals("y")) {
-//						System.out.println("계좌를 덮어쓰기합니다.");
-//					} else if (choiceTxt.equals("N") || choiceTxt.equals("n")) {
-//						System.out.println("계좌를 덮어쓰기를 취소합니다.");
-//					} else {
-//						System.out.println("Y또는 N키를 눌러 진행하십시오.");
-//					}
-//
-//				} else if (!(iAcnumber.equals(item.acnumber))) {
-//					nAccount.accountCreate();
-//					AccountSet.add(nAccount);
-//				}
-//			}
-//			
-//
-//		} else if (choice == 2) {
-//			System.out.println("신용신뢰계좌선택.");
-//			System.out.print("계좌번호: ");
-//			iAcnumber = scanner.nextLine();
-//			hcAccount.accountCreate();
-//			AccountSet.add(hcAccount);
-//		}
-//	}
 	void makeAccount(int choice) {
 		Scanner scanner = new Scanner(System.in);
 		String iAcnumber, iName, cRating, choiceTxt;
@@ -187,12 +145,8 @@ class AccountManager {
 	void showAccInfo() {
 		System.out.println("***계좌정보출력***");
 		System.out.println("--------------");
-		System.out.println(AccountSet.size());
 		for (Account ar : AccountSet) {
-			System.out.println("주소값" + ar);
-			System.out.println("해시코드" + ar.hashCode());
 			ar.showAccountInfo();
-			System.out.println("전체 계좌 개수" + AccountSet.size());
 			System.out.println("--------------");
 		}
 		System.out.println("전체계좌정보 출력이 완료되었습니다.");
@@ -200,7 +154,6 @@ class AccountManager {
 
 	void deleteAccount() {
 		Scanner scanner = new Scanner(System.in);
-		boolean isFind = false;
 		String deleteNum;
 		System.out.println("삭제할 계좌번호를 입력하세요:");
 		deleteNum = scanner.nextLine();
@@ -245,7 +198,7 @@ class AccountManager {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("복원 중 알 수 없는 예외발생");
+			System.out.println("알 수 없는 예외발생");
 		}
 		finally {
 			try {
@@ -255,4 +208,5 @@ class AccountManager {
 			}
 		}
 	}
+
 }

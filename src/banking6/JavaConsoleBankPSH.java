@@ -45,7 +45,7 @@ public class JavaConsoleBankPSH {
 					handler.deleteAccount();
 					break;
 				case BankMenu.SAVE:
-					autosave.start();
+					autosave.run();
 					break;
 				case BankMenu.EXIT:
 					handler.saveAccountInfo();

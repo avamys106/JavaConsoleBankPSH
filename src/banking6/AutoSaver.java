@@ -1,58 +1,48 @@
 package banking6;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
-class AutoSaver extends Thread{
+class AutoSaver extends AccountManager implements Runnable {
 
-	private static boolean autosave = false;
-
-	AccountManager handler = new AccountManager();
 	public AutoSaver() {
 	}
 
 	void test() throws InterruptedException {
-		while(true) {
-			try {
-				sleep(5000);
-				ObjectOutputStream out = new ObjectOutputStream(
-						new FileOutputStream("src/banking6/AutoSaveAccount.txt"));
-				out.writeObject(handler.AccountSet);
-				System.out.println("자동저장 진행중");
-		} catch (Exception e) {
-			
-		}
-		}
+		
 	}
+
 	@Override
 	public void run() {
-		try {
-			test();
-		} catch (InterruptedException e) {
+		while (true) {
+			try {
+				Thread.sleep(5000);
+				BufferedWriter out = new BufferedWriter(new FileWriter("src/banking6/AutoSaveAccount.txt"));
+				for (Account ar : AccountSet) {
+					out.write(ar.acnumber);
+					out.write(ar.name);
+					out.write(ar.mymoney);
+					System.out.println("저장완료");
+					
+				}
+				out.close();
+				System.out.println("자동저장 진행중");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-//	@Override
-//	public void run() {
-//		while (true) {
-//			try {
-//				Thread.sleep(5000);
-//				ObjectOutputStream out = new ObjectOutputStream(
-//						new FileOutputStream("src/banking6/AutoSaveAccount.txt"));
-//				for (Account ar : AccountSet) {
-//					out.writeObject(ar);
-//				}
-//				out.close();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			System.out.println("자동저장완료됨");
-//		}
-//	}
 
 	public static void main(String[] args) {
 		AutoSaver a = new AutoSaver();
-		a.setDaemon(true);
-		a.start();
+		Thread thread = new Thread(a);
+		thread.start();
 	}
 
 }

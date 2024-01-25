@@ -20,7 +20,7 @@ class NormalAccount extends Account {
 	@Override
 	public void showAccountInfo() {
 		super.showAccountInfo();
-		System.out.println("기본이자>" + interest +"%");
+		System.out.println("기본이자:" + interest +"%");
 	}
 	
 	@Override
@@ -36,21 +36,6 @@ class NormalAccount extends Account {
 		} else {
 			return false;
 		}
-	}
-	
-	@Override
-	public void accountCreate() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("보통계좌선택.");
-		System.out.print("계좌번호: ");
-		acnumber = scanner.nextLine();
-		System.out.print("고객이름: ");
-		name = scanner.nextLine();
-		System.out.print("잔고: ");
-		mymoney = scanner.nextInt();
-		System.out.print("기본이자%(정수형태로입력): ");
-		interest = scanner.nextInt();
-
 	}
 	
 	@Override
