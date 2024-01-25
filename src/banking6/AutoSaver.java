@@ -1,9 +1,9 @@
 package banking6;
 
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 class AutoSaver extends AccountManager implements Runnable {
 
@@ -19,7 +19,7 @@ class AutoSaver extends AccountManager implements Runnable {
 		while (true) {
 			try {
 				Thread.sleep(5000);
-				BufferedWriter out = new BufferedWriter(new FileWriter("src/banking6/AutoSaveAccount.txt"));
+				PrintWriter out = new PrintWriter(new FileWriter("src/banking6/AutoSaveAccount.txt"));
 				for (Account ar : AccountSet) {
 					out.write(ar.acnumber);
 					out.write(ar.name);

@@ -9,7 +9,7 @@ class choiceErrorException extends Exception {
 	}
 }
 
-public class JavaConsoleBankPSH {
+public class BankingSystemMain {
 
 	public static void main(String[] args) {
 
