@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.URLDecoder;
 
 //서버가 보내는 Echo메세지를 읽어오는 쓰레드 클래스
 public class Receiver extends Thread{
@@ -17,7 +18,7 @@ public class Receiver extends Thread{
 		
 		try {
 			in = new BufferedReader(new
-			InputStreamReader(this.socket.getInputStream()));
+			InputStreamReader(this.socket.getInputStream(), "UTF-8"));
 		} catch (Exception e) {
 			System.out.println("예외>Receiver>생성자:"+ e);
 		}
@@ -32,9 +33,13 @@ public class Receiver extends Thread{
 		
 		while(in != null) {
 			try {
-				System.out.println("Thread Receive : "+ in.readLine());
+				System.out.println("Thread Receive : "+ 
+						URLDecoder.decode(in.readLine(),"UTF-8"));
 			} catch (SocketException e) {
 				System.out.println("SocketException");
+				break;
+			} catch (NullPointerException e) {
+				System.out.println("종료");
 				break;
 			} catch (Exception e) {
 				System.out.println("예외>Receiver>run1:"+ e);

@@ -1,7 +1,8 @@
 package chat8;
 
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
-import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MultiClient {
@@ -12,27 +13,6 @@ public class MultiClient {
 		Scanner scanner = new Scanner(System.in);
 		String s_name = scanner.nextLine();
 		System.out.println("닉네임 " + s_name);
-		MultiServer multiServer = new MultiServer();
-		Iterator<String> it = multiServer.clientMap.keySet().iterator();
-		while(it.hasNext()) {
-			try {
-				String clientName = it.next();
-				if(s_name.equals(clientName)) {
-					System.out.println("oooooooooooooooooo");
-				} else {
-					System.out.println("xxxxxxxxxxx");
-				}
-			} catch (Exception e) {
-				System.out.println("예외:"+e);
-			}
-		}
-		/*
-		메세지 송수신을 위한 클래스를 별도로 만들었으므로 해당
-		멤버변수는 필요없음
-		 */
-        //PrintWriter out = null;
-		//BufferedReader in = null;
-		
 		try {
 			//서버에 접속 요청
 			String ServerIP = "localhost";
@@ -57,6 +37,10 @@ public class MultiClient {
 			Thread sender = new Sender(socket, s_name);
 			sender.start();
 			
+		} catch(UnsupportedEncodingException e1) {
+			
+		} catch (NoSuchElementException e) {
+			System.out.println("예외발생 2");
 		} catch (Exception e) {
 			System.out.println("예외발생[MultiClient]"+ e);
 		}

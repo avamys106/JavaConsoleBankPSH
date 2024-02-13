@@ -1,6 +1,8 @@
 package chat8;
 
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.concurrent.ConcurrentHashMap;
 
 //CRUD 중 입력을 위한 클래스
 public class SQLinsert extends MyConnection{
@@ -18,21 +20,20 @@ public class SQLinsert extends MyConnection{
 	
 	@Override
 	public void dbExecute() {
+		MultiServer multiServer = new MultiServer();
+		String name = "";
+		String s = "";
+		PrintWriter out = null;
 		try {
-			query = " INSERT INTO chat_talking VALUES " 
-					+ " (?, ?, ?, sysdate) ";
-			//동적쿼리 실행을 위한 preparedStatement 인스턴스 생성
+			query = " INSERT INTO chat_talking "
+					+ " VALUES (?, ?, ?, sysdate) ";
 			psmt = con.prepareStatement(query);
-			/*
-			동적쿼리문의 ?부분(인파라미터)을 사용자의 입력값으로 채워준다.
-			DB에서는 인덱스가 1부터 시작이므로 ?의 갯수만큼 순서대로
-			값을 설정하면 된다. 
-			*/
-			psmt.setString(1, inputValue("a"));
-			psmt.setString(2, inputValue("아이디"));
-			psmt.setString(3, inputValue("내용"));
+			psmt.setString(1, "serial_num.NEXTVAL");
+			psmt.setString(2, multiServer.clientMap.toString());
+			psmt.setString(3, multiServer.toString());
+//			psmt.setString(2, String.join(",", multiServer.clientMap.keySet()));
 			//쿼리문 실행 및 결과 반환
-			result = psmt.executeUpdate();
+			int result = psmt.executeUpdate();
 			//insert 쿼리문이므로 성공시 1, 실패시 0이 반환된다.
 			System.out.println(result + "행 입력됨");
 			
